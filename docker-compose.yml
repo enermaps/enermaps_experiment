@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  geoserver:
+    image: camptocamp/geoserver:jetty-2.11.2
+    ports:
+    - "8000:8080"
+
+  db:
+    build: ./postgis
+    environment:
+      POSTGRES_PASSWORD: example
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  db-data:
