@@ -15,7 +15,6 @@ nest = NestedDict()
 class ImportError(Exception):
     pass
 
-
 def get_import_creation_payload(workspace_name):
     import_creation_payload = NestedDict()
     import_creation_payload["import"]["targetWorkspace"]["workspace"][
@@ -25,7 +24,6 @@ def get_import_creation_payload(workspace_name):
 
 
 def import_file(base_url, user, password, file_path, workspace_name):
-
     session = requests.Session()
     session.auth = (user, password)
     import_creation_payload = get_import_creation_payload(workspace_name)
@@ -46,7 +44,6 @@ def import_file(base_url, user, password, file_path, workspace_name):
         "http://localhost:8000/geoserver/rest/imports/{!s}".format(import_id)
     )
     logging.info(resp, resp.text)
-
 
 def get_parser():
     """return the cli command parser"""
