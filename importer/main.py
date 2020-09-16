@@ -2,21 +2,21 @@
 """This import a simple raster into the geoserver
 """
 import argparse
+import posixpath
 import logging
 import os
 from collections import defaultdict
 
 import requests
 
-NestedDict = lambda: defaultdict(nested_dict)
-nest = NestedDict()
+nested_dict= lambda: defaultdict(nested_dict)
+NestedDict = nested_dict()
 
-
-class ImportError(Exception):
+class GeoserverImportError(Exception):
     pass
 
 def get_import_creation_payload(workspace_name):
-    import_creation_payload = NestedDict()
+    import_creation_payload = NestedDict
     import_creation_payload["import"]["targetWorkspace"]["workspace"][
         "name"
     ] = workspace_name
@@ -27,22 +27,22 @@ def import_file(base_url, user, password, file_path, workspace_name):
     session = requests.Session()
     session.auth = (user, password)
     import_creation_payload = get_import_creation_payload(workspace_name)
+    url = posixpath.join(base_url, "rest/imports")
     resp = session.post(url, json=import_creation_payload)
     if not resp.ok:
-        raise ImportError(resp.text)
+        raise GeoserverImportError(resp.text)
     resp_payload = resp.json()
     import_id = resp_payload["import"]["id"]
 
     filename = os.path.basename(file_path)
-    url = "http://localhost:8000/geoserver/rest/imports/{!s}/tasks".format(import_id)
+    url = posixpath.join(base_url, "rest/imports/{!s}/tasks".format(import_id))
     with open(file_path, "br") as shapefile:
         resp = session.post(url, files={"name": filename, "filedata": shapefile})
         logging.info(resp, resp.text)
         if not resp.ok:
-            raise ImportError(resp.text)
-    resp = session.post(
-        "http://localhost:8000/geoserver/rest/imports/{!s}".format(import_id)
-    )
+            raise GeoserverImportError(resp.text)
+    url = posixpath.join(base_url, "rest/imports/{!s}".format(import_id))
+    resp = session.post(url)
     logging.info(resp, resp.text)
 
 def get_parser():
@@ -51,6 +51,7 @@ def get_parser():
         __name__, description="import a raster into a geoserver"
     )
     parser.add_argument("-u", "--user", default="admin")
+    parser.add_argument("-n", "--workspace_name", default="enermaps")
     parser.add_argument(
         "-b",
         "--base_url",
