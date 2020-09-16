@@ -20,13 +20,15 @@ def post(user, password, file_path):
     session = requests.Session()
     session.auth = (user, password)
     resp = session.post(url, json=payload)
-    print(resp, resp.text)
+    if not resp.ok:
+        print(resp, resp.text)
+        return 
     resp_payload = resp.json()
     import_id = resp_payload["import"]["id"]
 
     filename = os.path.basename(file_path)
     url = "http://localhost:8000/geoserver/rest/imports/{!s}/tasks".format(import_id)
-    with open(file_path) as shapefile:
+    with open(file_path, 'br') as shapefile:
         resp = session.post(url, files={"name": filename, "filedata": shapefile})
         print(resp, resp.text)
     resp = session.post("http://localhost:8000/geoserver/rest/imports/{!s}".format(import_id))
