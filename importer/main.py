@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """This import a simple raster into the geoserver
 """
-import requests
 import argparse
 import os
+
+import requests
 
 
 def post(user, password, file_path):
