@@ -27,7 +27,7 @@ def post(user, password, file_path):
     filename = os.path.basename(file_path)
     url = "http://localhost:8000/geoserver/rest/imports/{!s}/tasks".format(import_id)
     with open(file_path) as shapefile:
-        resp = session.get(url, data={"name": filename, "filedata": shapefile.read()})
+        resp = session.post(url, files={"name": filename, "filedata": shapefile})
         print(resp, resp.text)
     resp = session.post("http://localhost:8000/geoserver/rest/imports/{!s}".format(import_id))
     print(resp, resp.text)
