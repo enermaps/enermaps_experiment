@@ -5,7 +5,7 @@ services:
     volumes:
     - geoserver-data:/var/lib/jetty/webapps/geoserver/data
     ports:
-    - "8000:8080"
+      - "127.0.0.1:8000:8080"
 
   db:
     build: ./postgis
@@ -14,7 +14,7 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
     ports:
-    - "5432:5432"
+      - "127.0.0.1:5432:5432"
 
 volumes:
   db-data:
