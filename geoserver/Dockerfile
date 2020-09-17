@@ -1,4 +1,4 @@
-FROM alpine as downloader
+FROM alpine:3 as downloader
 
 RUN apk add --no-cache wget
 RUN wget -q http://sourceforge.net/projects/geoserver/files/GeoServer/2.11.2/extensions/geoserver-2.11.2-importer-plugin.zip -O /importer-plugin.zip
