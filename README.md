@@ -1,6 +1,17 @@
 Base skeleton for experimenting around what enermap could become
+# Importer 
 
-# Codestyle
+Import a local file into the geoserver.
+
+# geoserver
+
+Docker image of the enermap geoserver.
+
+# postgis
+
+Postgres database with postgis based on the camptocamp image.
+
+## Codestyle
 
 Just use ![black](https://github.com/psf/black) for all python code.
 
@@ -24,16 +35,3 @@ You can setup the geoserver if you started it for the first time by running:
 	./geoserver/init.py
 
 Note that you will need to have the requests library installed first.
-
-# Repository 
-## Importer 
-
-Import a local file into the geoserver.
-
-## geoserver
-
-Docker image of the enermap geoserver.
-
-## postgis
-
-Postgres database with postgis based on the camptocamp image.
