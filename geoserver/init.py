@@ -3,7 +3,7 @@ import os
 
 import requests
 
-WORKSPACE=os.environ["WORKSPACE"]
+WORKSPACE = os.environ["WORKSPACE"]
 
 
 def init():
@@ -19,22 +19,28 @@ def init():
     print(resp, resp.text)
 
     data_source = {
-      "dataStore": {
-          "name": "geoserver_db",
-          "connectionParameters": {
-            "entry": [
-              {"@key":"host","$":os.environ["GEOSERVER_DB_HOST"]},
-              {"@key":"port","$":"5432"},
-              {"@key":"database","$":os.environ["GEOSERVER_DB"]},
-              {"@key":"user","$":os.environ["GEOSERVER_DB_USER"]},
-              {"@key":"passwd","$":os.environ["GEOSERVER_DB_PASS"]},
-              {"@key":"dbtype","$":"postgis"}
-            ]
-          }
+        "dataStore": {
+            "name": "geoserver_db",
+            "connectionParameters": {
+                "entry": [
+                    {"@key": "host", "$": os.environ["GEOSERVER_DB_HOST"]},
+                    {"@key": "port", "$": "5432"},
+                    {"@key": "database", "$": os.environ["GEOSERVER_DB"]},
+                    {"@key": "user", "$": os.environ["GEOSERVER_DB_USER"]},
+                    {"@key": "passwd", "$": os.environ["GEOSERVER_DB_PASS"]},
+                    {"@key": "dbtype", "$": "postgis"},
+                ]
+            },
         }
-      }
-    resp = session.post("http://localhost:8000/geoserver/rest/workspaces/{}/datastores".format(WORKSPACE), json=data_source)
+    }
+    resp = session.post(
+        "http://localhost:8000/geoserver/rest/workspaces/{}/datastores".format(
+            WORKSPACE
+        ),
+        json=data_source,
+    )
     print(resp, resp.text)
+
 
 if __name__ == "__main__":
     init()
