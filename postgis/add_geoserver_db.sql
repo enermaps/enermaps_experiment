@@ -1,10 +1,14 @@
 /* create the database for the toolbox */
 
 
-CREATE ROLE app WITH UNENCRYPTED PASSWORD 'app';
-ALTER ROLE app WITH LOGIN;
-CREATE DATABASE app OWNER 'app';
-REVOKE ALL PRIVILEGES ON DATABASE app FROM public;
+CREATE ROLE geoserver WITH UNENCRYPTED PASSWORD 'geoserver';
+ALTER ROLE geoserver WITH LOGIN;
+CREATE DATABASE geoserver OWNER 'geoserver';
+REVOKE ALL PRIVILEGES ON DATABASE geoserver FROM public;
 
-GRANT ALL PRIVILEGES ON DATABASE app TO app;
+GRANT ALL PRIVILEGES ON DATABASE geoserver TO geoserver;
 
+ALTER DATABASE geoserver SET search_path = public, postgis;
+\c geoserver
+
+CREATE EXTENSION IF NOT EXISTS postgis ;
