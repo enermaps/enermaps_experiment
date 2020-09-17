@@ -6,6 +6,8 @@ services:
     - geoserver-data:/var/lib/jetty/webapps/geoserver/data
     ports:
       - "127.0.0.1:8000:8080"
+    env_file:
+      .env
 
   db:
     build: ./postgis
@@ -15,6 +17,8 @@ services:
       - db-data:/var/lib/postgresql/data
     ports:
       - "127.0.0.1:5432:5432"
+    env_file:
+      .env
 
 volumes:
   db-data:
