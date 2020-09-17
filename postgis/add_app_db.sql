@@ -1,0 +1,10 @@
+/* create the database for the toolbox */
+
+
+CREATE ROLE app WITH UNENCRYPTED PASSWORD 'app';
+ALTER ROLE app WITH LOGIN;
+CREATE DATABASE app OWNER 'app';
+REVOKE ALL PRIVILEGES ON DATABASE app FROM public;
+
+GRANT ALL PRIVILEGES ON DATABASE app TO app;
+
