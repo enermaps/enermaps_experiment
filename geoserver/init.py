@@ -23,7 +23,7 @@ def init():
           "name": "geoserver_db",
           "connectionParameters": {
             "entry": [
-              {"@key":"host","$":os.environ["GEOSERVER_HOST"]},
+              {"@key":"host","$":os.environ["GEOSERVER_DB_HOST"]},
               {"@key":"port","$":"5432"},
               {"@key":"database","$":os.environ["GEOSERVER_DB"]},
               {"@key":"user","$":os.environ["GEOSERVER_DB_USER"]},
