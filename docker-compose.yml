@@ -22,15 +22,15 @@ services:
 
   app:
     build:
-      context: https://github.com/HotMaps/Hotmaps-toolbox-service.git
-      dockerfile: ./api/dockerfiles/api/Dockerfile
+      context: https://github.com/HotMaps/Hotmaps-toolbox-service.git#:api
+      dockerfile: ./dockerfiles/api/Dockerfile
     expose:
     - 80
     restart: always
 
   frontend:
     build:
-      context: https://github.com/HotMaps/Hotmaps-toolbox-client.git
+      context: https://github.com/gcmalloc/Hotmaps-toolbox-client.git#full_dockerfile
     expose:
     - 80
     restart: always
