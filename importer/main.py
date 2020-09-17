@@ -9,11 +9,13 @@ from collections import defaultdict
 
 import requests
 
-nested_dict= lambda: defaultdict(nested_dict)
+nested_dict = lambda: defaultdict(nested_dict)
 NestedDict = nested_dict()
+
 
 class GeoserverImportError(Exception):
     pass
+
 
 def get_import_creation_payload(workspace_name):
     import_creation_payload = NestedDict
@@ -44,6 +46,7 @@ def import_file(base_url, user, password, file_path, workspace_name):
     url = posixpath.join(base_url, "rest/imports/{!s}".format(import_id))
     resp = session.post(url)
     logging.info(resp, resp.text)
+
 
 def get_parser():
     """return the cli command parser"""

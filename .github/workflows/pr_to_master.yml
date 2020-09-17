@@ -19,5 +19,4 @@ jobs:
     steps:
       - uses: jpetrucciani/black-check@master
         with:
-          path: '.'
-          path: "importer/"
+          path: "."
