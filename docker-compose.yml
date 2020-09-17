@@ -20,6 +20,21 @@ services:
     env_file:
       .env
 
+  app:
+    build:
+      context: https://github.com/HotMaps/Hotmaps-toolbox-service.git
+      dockerfile: ./api/dockerfiles/api/Dockerfile
+    expose:
+    - 80
+    restart: always
+
+  frontend:
+    build:
+      context: https://github.com/HotMaps/Hotmaps-toolbox-client.git
+    expose:
+    - 80
+    restart: always
+
 volumes:
   db-data:
   geoserver-data:
