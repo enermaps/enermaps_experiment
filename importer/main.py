@@ -17,13 +17,18 @@ class GeoserverImportError(Exception):
     pass
 
 
+DATASTORE = {
+  "dataStore": {
+    "name": "geoserver_db"
+  }
+}
+
 def get_import_creation_payload(workspace_name):
     import_creation_payload = NestedDict
     import_creation_payload["import"]["targetWorkspace"]["workspace"][
         "name"
     ] = workspace_name
-    import_creation_payload["targetStore"][
-      "dataStore"]["name"] = "geoserver_db"
+    import_creation_payload["targetStore"] = DATASTORE
     return import_creation_payload
 
 
@@ -45,6 +50,13 @@ def import_file(base_url, user, password, file_path, workspace_name):
         logging.info(resp, resp.text)
         if not resp.ok:
             raise GeoserverImportError(resp.text)
+
+    # the file doesn't have a store set, so it will default to the default store
+    print(resp)
+    url = posixpath.join(base_url, "rest/imports/{!s}/tasks/0/target".format(import_id))
+    resp = session.put(url, json=DATASTORE)
+    logging.info(resp, resp.text)
+
     url = posixpath.join(base_url, "rest/imports/{!s}".format(import_id))
     resp = session.post(url)
     logging.info(resp, resp.text)
