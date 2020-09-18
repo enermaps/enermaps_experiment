@@ -22,6 +22,8 @@ def get_import_creation_payload(workspace_name):
     import_creation_payload["import"]["targetWorkspace"]["workspace"][
         "name"
     ] = workspace_name
+    import_creation_payload["targetStore"][
+      "dataStore"]["name"] = "geoserver_db"
     return import_creation_payload
 
 
