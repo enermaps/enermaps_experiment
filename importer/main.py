@@ -2,9 +2,9 @@
 """This import a simple raster into the geoserver
 """
 import argparse
-import posixpath
 import logging
 import os
+import posixpath
 from collections import defaultdict
 
 import requests
@@ -17,11 +17,8 @@ class GeoserverImportError(Exception):
     pass
 
 
-DATASTORE = {
-  "dataStore": {
-    "name": "geoserver_db"
-  }
-}
+DATASTORE = {"dataStore": {"name": "geoserver_db"}}
+
 
 def get_import_creation_payload(workspace_name):
     import_creation_payload = NestedDict
@@ -54,12 +51,18 @@ def import_file(base_url, user, password, file_path, workspace_name, is_raster=F
     if not is_raster:
         # the file doesn't have a store set, so it will default to the default store
         # currently we don't support importing raster file to postgis directly
-        url = posixpath.join(base_url, "rest/imports/{!s}/tasks/0/target".format(import_id))
+        url = posixpath.join(
+            base_url, "rest/imports/{!s}/tasks/0/target".format(import_id)
+        )
         resp = session.put(url, json=DATASTORE)
+        if not resp.ok:
+            raise GeoserverImportError(resp.text)
         logging.info(resp, resp.text)
 
     url = posixpath.join(base_url, "rest/imports/{!s}".format(import_id))
     resp = session.post(url)
+    if not resp.ok:
+        raise GeoserverImportError(resp.text)
     logging.info(resp, resp.text)
 
 

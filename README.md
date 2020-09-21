@@ -32,6 +32,6 @@ You can setup the geoserver if you started it for the first time by running:
 
 	#this will export configuration variable into the current shell
 	export $(cat .env | xargs) 
-	./geoserver/init.py
+	./importer/geoserver_init.py
 
 Note that you will need to have the requests library installed first.
