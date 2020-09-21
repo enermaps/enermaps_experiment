@@ -52,7 +52,6 @@ def import_file(base_url, user, password, file_path, workspace_name):
             raise GeoserverImportError(resp.text)
 
     # the file doesn't have a store set, so it will default to the default store
-    print(resp)
     url = posixpath.join(base_url, "rest/imports/{!s}/tasks/0/target".format(import_id))
     resp = session.put(url, json=DATASTORE)
     logging.info(resp, resp.text)
