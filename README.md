@@ -17,6 +17,8 @@ Just use ![black](https://github.com/psf/black) for all python code.
 
 Pylint is also nice to have and is recommended but not enforced.
 
+The import order and location be fixed to match the pep8 using ![isort](https://github.com/PyCQA/isort)
+
 # Local Dev environment
 
 Install docker and docker-compose
@@ -32,6 +34,6 @@ You can setup the geoserver if you started it for the first time by running:
 
 	#this will export configuration variable into the current shell
 	export $(cat .env | xargs) 
-	./geoserver/init.py
+	./importer/geoserver_init.py
 
 Note that you will need to have the requests library installed first.

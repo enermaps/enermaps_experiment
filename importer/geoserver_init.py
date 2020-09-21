@@ -3,8 +3,6 @@ import os
 
 import requests
 
-WORKSPACE = os.environ["WORKSPACE"]
-
 
 def init():
     """From an empty geoserver:
@@ -13,9 +11,9 @@ def init():
     """
     session = requests.Session()
     session.auth = (os.environ["GEOSERVER_USER"], os.environ["GEOSERVER_PASS"])
+    workspace = os.environ["WORKSPACE"]
     url = "http://127.0.0.1:8000/geoserver/rest/workspaces"
-    print(WORKSPACE)
-    resp = session.post(url, json={"workspace": {"name": WORKSPACE, "default": True}})
+    resp = session.post(url, json={"workspace": {"name": workspace, "default": True}})
     print(resp, resp.text)
 
     data_source = {
@@ -35,7 +33,7 @@ def init():
     }
     resp = session.post(
         "http://localhost:8000/geoserver/rest/workspaces/{}/datastores".format(
-            WORKSPACE
+            workspace
         ),
         json=data_source,
     )
