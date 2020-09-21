@@ -37,7 +37,7 @@ class TestImport(unittest.TestCase):
             password=os.environ["GEOSERVER_PASS"],
             file_path="hotmaps-cdd_curr.tif",
             workspace_name=os.environ["WORKSPACE"],
-            is_raster=True,
+            is_raster=False,
         )
 
     def test_shapefile_import(self):
