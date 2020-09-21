@@ -32,7 +32,7 @@ def get_import_creation_payload(workspace_name):
     return import_creation_payload
 
 
-def import_file(base_url, user, password, file_path, workspace_name):
+def import_file(base_url, user, password, file_path, workspace_name, is_raster=False):
     session = requests.Session()
     session.auth = (user, password)
     import_creation_payload = get_import_creation_payload(workspace_name)
@@ -51,10 +51,12 @@ def import_file(base_url, user, password, file_path, workspace_name):
         if not resp.ok:
             raise GeoserverImportError(resp.text)
 
-    # the file doesn't have a store set, so it will default to the default store
-    url = posixpath.join(base_url, "rest/imports/{!s}/tasks/0/target".format(import_id))
-    resp = session.put(url, json=DATASTORE)
-    logging.info(resp, resp.text)
+    if not is_raster:
+        # the file doesn't have a store set, so it will default to the default store
+        # currently we don't support importing raster file to postgis directly
+        url = posixpath.join(base_url, "rest/imports/{!s}/tasks/0/target".format(import_id))
+        resp = session.put(url, json=DATASTORE)
+        logging.info(resp, resp.text)
 
     url = posixpath.join(base_url, "rest/imports/{!s}".format(import_id))
     resp = session.post(url)
@@ -68,13 +70,14 @@ def get_parser():
     )
     parser.add_argument("-u", "--user", default="admin")
     parser.add_argument("-n", "--workspace_name", default="enermaps")
+    parser.add_argument("-r", "--is_raster", default="False")
     parser.add_argument(
         "-b",
         "--base_url",
         default="http://127.0.0.1:8000/geoserver",
         help="base url to reach the geoserver",
     )
-    parser.add_argument("shapefile")
+    parser.add_argument("geofile")
     parser.add_argument(
         "-v", "--verbose", help="increase output verbosity", action="store_true"
     )
@@ -93,6 +96,7 @@ def main():
         password=os.environ["GEOSERVER_PASS"],
         file_path=args.shapefile,
         workspace_name=args.workspace_name,
+        is_raster=args.is_raster,
     )
 
 
