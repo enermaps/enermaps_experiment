@@ -97,7 +97,7 @@ def main():
         base_url=args.base_url,
         user=args.user,
         password=os.environ["GEOSERVER_PASS"],
-        file_path=args.shapefile,
+        file_path=args.geofile,
         workspace_name=args.workspace_name,
         is_raster=args.is_raster,
     )
