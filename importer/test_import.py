@@ -30,24 +30,22 @@ class TestImport(unittest.TestCase):
 
     def test_geotiff_import(self):
         """Test the run of the importer on a geotiff raster file"""
-        print("test")
         main.import_file(
             GEOSERVER_BASE_URL,
             user=os.environ["GEOSERVER_USER"],
             password=os.environ["GEOSERVER_PASS"],
-            file_path="hotmaps-cdd_curr.tif",
+            file_path="testdata/hotmaps-cdd_curr.tif",
             workspace_name=os.environ["WORKSPACE"],
             is_raster=False,
         )
 
     def test_shapefile_import(self):
         """Test the run of the importer on a gml file"""
-        print("test")
         main.import_file(
             GEOSERVER_BASE_URL,
             user=os.environ["GEOSERVER_USER"],
             password=os.environ["GEOSERVER_PASS"],
-            file_path="bau_final_energy_consumption_view.gml",
+            file_path="testdata/bau_final_energy_consumption_view.gml",
             workspace_name=os.environ["WORKSPACE"],
             is_raster=True,
         )
@@ -60,7 +58,7 @@ def setUpModule():
     # verify that the stack is down
     docker_compose("down")
     docker_compose("rm")
-    docker_compose("up", "--build", "-d")
+    docker_compose("up", "--build", "-d", "geoserver", "db")
     time.sleep(60)
     # init the geoserver
     geoserver_init.init()
