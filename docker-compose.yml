@@ -22,18 +22,13 @@ services:
 
   app:
     build:
-      context: https://github.com/HotMaps/Hotmaps-toolbox-service.git#:api
-      dockerfile: ./dockerfiles/api/Dockerfile
+      context: ../Hotmaps-toolbox-service/api/
     ports:
-      - "127.0.0.1:9090:80"
+      - "127.0.0.1:9000:80"
     restart: always
+    env_file:
+      .env
 
-  #frontend:
-  #  build:
-  #    context: https://github.com/gcmalloc/Hotmaps-toolbox-client.git#full_dockerfile
-  #  expose:
-  #  - 80
-  #  restart: always
   rabbit:
     hostname: rabbit
     image: rabbitmq:latest
