@@ -20,6 +20,21 @@ services:
     env_file:
       .env
 
+  app:
+    build:
+      context: ../Hotmaps-toolbox-service/api/
+    ports:
+      - "127.0.0.1:9000:80"
+    volumes:
+      - upload-data:/var/hotmaps/users
+    restart: always
+    env_file:
+      .env
+
+  redis:
+    image: redis
+
 volumes:
   db-data:
   geoserver-data:
+  upload-data:

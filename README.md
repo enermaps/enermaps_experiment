@@ -21,14 +21,24 @@ The import order and location be fixed to match the pep8 using ![isort](https://
 
 # Local Dev environment
 
+First, clone this repository, then git@github.com:enermaps/Hotmaps-toolbox-service.git in the same directory.
+You should end up with the following directory organisation:
+
+* root
+    * Hotmaps-toolbox-service
+    * enermaps
+
 Install docker and docker-compose
 
 then run
 
 	docker-compose up
 
-this will start a local geoserver and a local postgres data. 
-The local postgresql will be available at http://127.0.0.1:5432 and the geoserver at http://127.0.0.1:8000
+this will start the following set of services:
+
+The local postgresql will be available at 127.0.0.1:5432 
+the geoserver at http://127.0.0.1:8000/geoserver
+the api server at http://127.0.0.1:9000/api
 
 You can setup the geoserver if you started it for the first time by running:
 
@@ -37,3 +47,7 @@ You can setup the geoserver if you started it for the first time by running:
 	./importer/geoserver_init.py
 
 Note that you will need to have the requests library installed first.
+
+If you are only interested in a subset of services, you can check for those service in the docker-compose.yaml file and only start the one you are interested in. For example for only starting the postgis database and the geoserver:
+
+	docker-compose up geoserver db
