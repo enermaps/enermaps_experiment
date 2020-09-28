@@ -26,7 +26,7 @@ services:
     ports:
       - "127.0.0.1:9000:80"
     volumes:
-      - upload-dir:/var/hotmaps/users
+      - upload-data:/var/hotmaps/users
     restart: always
     env_file:
       .env
@@ -37,3 +37,4 @@ services:
 volumes:
   db-data:
   geoserver-data:
+  upload-data:
