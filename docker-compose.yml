@@ -25,6 +25,8 @@ services:
       context: ../Hotmaps-toolbox-service/api/
     ports:
       - "127.0.0.1:9000:80"
+    volumes:
+      - upload-dir:/var/hotmaps/users
     restart: always
     env_file:
       .env
