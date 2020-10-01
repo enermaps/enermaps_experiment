@@ -31,6 +31,15 @@ services:
     env_file:
       .env
 
+  frontend:
+    build:
+      context: ../Hotmaps-toolbox-client
+    ports:
+      - "127.0.0.1:7000:80"
+    restart: always
+    env_file:
+      .env
+
   redis:
     image: redis
 
