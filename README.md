@@ -39,6 +39,7 @@ this will start the following set of services:
 The local postgresql will be available at 127.0.0.1:5432 
 the geoserver at http://127.0.0.1:8000/geoserver
 the api server at http://127.0.0.1:9000/api
+the frontend at http://127.0.0.1:7000/api
 
 You can setup the geoserver if you started it for the first time by running:
 
