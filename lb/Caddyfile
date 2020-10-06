@@ -1,0 +1,13 @@
+:80
+log
+
+reverse_proxy / frontend:80/
+
+redir /map /map/
+reverse_proxy /map/* frontend:80/map
+
+redir /api /api/
+reverse_proxy /api/* /swaggerui/* api:80
+
+redir /geoserver /geoserver/
+reverse_proxy /geoserver/* geoserver:8080/geoserver
