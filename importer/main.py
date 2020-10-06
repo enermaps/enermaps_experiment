@@ -42,8 +42,8 @@ def import_file(base_url, user, password, file_path, workspace_name, is_raster=F
 
     filename = os.path.basename(file_path)
     url = posixpath.join(base_url, "rest/imports/{!s}/tasks".format(import_id))
-    with open(file_path, "br") as shapefile:
-        resp = session.post(url, files={"name": filename, "filedata": shapefile})
+    with open(file_path, "br") as geofile:
+        resp = session.post(url, files={"name": filename, "filedata": geofile})
         logging.info(resp, resp.text)
         if not resp.ok:
             raise GeoserverImportError(resp.text)
