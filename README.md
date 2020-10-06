@@ -21,11 +21,14 @@ The import order and location be fixed to match the pep8 using ![isort](https://
 
 # Local Dev environment
 
-First, clone this repository, then git@github.com:enermaps/Hotmaps-toolbox-service.git in the same directory.
+First, clone this repository, 
+then git@github.com:enermaps/Hotmaps-toolbox-service.git in the same directory.
+then git@github.com:enermaps/Hotmaps-toolbox-client.git in the same directory.
 You should end up with the following directory organisation:
 
 * root
     * Hotmaps-toolbox-service
+    * Hotmaps-toolbox-client
     * enermaps
 
 Install docker and docker-compose
