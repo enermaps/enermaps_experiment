@@ -1,5 +1,10 @@
 version: "3.8"
 services:
+  lb:
+    build: ./lb
+    ports:
+      - "127.0.0.1:2000:80"
+
   geoserver:
     build: ./geoserver
     volumes:
@@ -20,7 +25,7 @@ services:
     env_file:
       .env
 
-  app:
+  api:
     build:
       context: ../Hotmaps-toolbox-service/api/
     ports:
