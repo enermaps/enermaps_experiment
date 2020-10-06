@@ -1,11 +1,10 @@
 :80
 log
 
-reverse_proxy / frontend:80/
-
-redir / /map/
 redir /map /map/
+reverse_proxy /* frontend:80
 reverse_proxy /map/* frontend:80
+reverse_proxy /assets/* frontend:80
 
 redir /api /api/
 reverse_proxy /api/*  api:80
