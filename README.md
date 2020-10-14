@@ -31,9 +31,9 @@ You should end up with the following directory organisation:
     * Hotmaps-toolbox-client
     * enermaps
 
-Install docker and docker-compose
+Install ![docker](https://www.docker.com/products/docker-desktop) and ensure that it is started. 
 
-then run
+then run the command
 
 	docker-compose up
 
