@@ -3,7 +3,7 @@ import os
 
 import requests
 
-
+WORKSPACE_TO_DELETE = ("it.geosolutions", "topp", )
 def init():
     """From an empty geoserver:
     * Add the enermap workspace if not defined yet.
@@ -14,6 +14,9 @@ def init():
     workspace = os.environ["WORKSPACE"]
     url = "http://127.0.0.1:8000/geoserver/rest/workspaces"
     resp = session.post(url, json={"workspace": {"name": workspace, "default": True}})
+    for workspace_to_delete in WORKSPACE_TO_DELETE:
+        resp = session.delete(url + "/" + workspace_to_delete + "/" + ".DUMMY")
+        print(resp, resp.text)
     print(resp, resp.text)
 
     data_source = {
