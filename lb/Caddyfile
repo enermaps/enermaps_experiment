@@ -10,6 +10,11 @@ redir /api /api/
 reverse_proxy /api/*  api:80
 reverse_proxy /swaggerui/* api:80
 
+
 #redir /geoserver /geoserver/
 reverse_proxy /geoserver* geoserver:8080
 reverse_proxy /geoserver/* geoserver:8080
+
+header /* {
+	   Access-Control-Allow-Origin *
+	}

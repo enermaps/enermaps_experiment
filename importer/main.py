@@ -1,10 +1,17 @@
 #!/usr/bin/env python3
 """This import a simple raster into the geoserver
 """
-from importer import GeoserverImporter
-import os
 import argparse
+import collections
+import logging
+import os
+import posixpath
+from typing import Text, Iterable, Tuple
+from collections import defaultdict
 
+import requests
+
+from importer import GeoserverImporter
 
 def get_parser():
     """return the cli command parser"""
