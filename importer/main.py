@@ -73,7 +73,7 @@ def get_parser():
     )
     parser.add_argument("-u", "--user", default="admin")
     parser.add_argument("-n", "--workspace_name", default="enermaps")
-    parser.add_argument("-r", "--is_raster", default="False")
+    parser.add_argument("-r", "--is_raster", action='store_true')
     parser.add_argument(
         "-b",
         "--base_url",
