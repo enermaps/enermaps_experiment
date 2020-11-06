@@ -17,6 +17,13 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - uses: jpetrucciani/black-check@master
+      - name: "Run python black linter"
+        uses: jpetrucciani/black-check@master
         with:
           path: "."
+      - name: "Run Dockerfile linter"
+        uses: luke142367/Docker-Lint-Action@v1.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          target: importer/Dockerfile postgis/Dockerfile geoserver/Dockerfile

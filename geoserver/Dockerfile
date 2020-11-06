@@ -1,4 +1,4 @@
-FROM alpine as downloader
+FROM alpine:3 as downloader
 
 RUN apk add --no-cache wget
 WORKDIR /plugins
